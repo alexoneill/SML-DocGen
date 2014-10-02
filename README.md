@@ -21,9 +21,18 @@ cp docgen ~/bin
 Usage
 =====
 
+For modifying in the same directory
 ```
 ./docgen my-sml-file.sml
 ```
 
-`docgen` supports wildcards, multiple files passed in. It does not support
-absolute paths quite yet. I will do that very soon!
+Or, if you installed it into `~/bin`
+```
+docgen my-sml-file.sml
+```
+
+`docgen` supports wildcards, multiple files passed in. It writes to
+`my-sml-file.sml.tmp` when it completes, next to where the old file is.
+It will overwrite any previous versions.
+
+It does not support absolute paths quite yet. I will do that very soon!
