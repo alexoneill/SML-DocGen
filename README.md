@@ -1,13 +1,6 @@
 SML-DocGen
 =============
 
-Disclaimer
-----------
-
-This is purely for personal use. I assume no liability for the use of this program on an
-actual homework assignment, rather the intent is for use on personal code. Please see the
-LISCENCE file.
-
 Generate the documentation for SML files, following the standards set forth within CMU's
 15-150 Functional Programming course.
 
@@ -64,3 +57,12 @@ The Future
 
 It does not support absolute paths quite yet. Nor does it give templates
 for test functions. These will be added in the future.
+
+
+
+Disclaimer
+==========
+
+This is purely for personal use. I assume no liability for the use of this program on an
+actual homework assignment, rather the intent is for use on personal code. Please see the
+LISCENCE file.
