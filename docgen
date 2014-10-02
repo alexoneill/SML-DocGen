@@ -24,9 +24,6 @@ def detectDoc(lines, i):
 
 # Where the magic happens!
 def produceDocumentation(path, fileName):
-  print (path, fileName)
-  return
-
   smlFile = open(path)
 
   # Get lines

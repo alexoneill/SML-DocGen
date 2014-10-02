@@ -3,6 +3,22 @@
 
 Generate the documentation for homework solutions in CMU's 15-150 Functional Programming course.
 
+It takes the following SML function declaration:
+```
+(* 3.1 *)
+fun shrub_map f S = raise Fail "Unimplemented"
+```
+and transforms it to this:
+```
+(* 3.1 *)
+(*
+    shrub_map : 'a -> 'b -> 'c
+    REQUIRES: true
+    ENSURES: shrub_map
+*)
+fun shrub_map f S = raise Fail "Unimplemented"
+```
+
 Installation
 ============
 
