@@ -51,4 +51,8 @@ docgen my-sml-file.sml
 `my-sml-file.sml.tmp` when it completes, next to where the old file is.
 It will overwrite any previous versions.
 
-It does not support absolute paths quite yet. I will do that very soon!
+The Future
+==========
+
+It does not support absolute paths quite yet. Nor does it give templates
+for test functions. These will be added in the future.
