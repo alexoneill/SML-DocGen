@@ -1,30 +1,38 @@
-15-150-DocGen
+SML-DocGen
 =============
 
-Generate the documentation for homework solutions in CMU's 15-150 Functional Programming course.
+Disclaimer
+----------
+
+This is purely for personal use. I assume no liability for the use of this program on an
+actual homework assignment, rather the intent is for use on personal code. Please see the
+LISCENCE file.
+
+Generate the documentation for SML files, following the standards set forth within CMU's
+15-150 Functional Programming course.
 
 It takes the following SML function declaration:
 ```
-(* 3.1 *)
-fun shrub_map f S = raise Fail "Unimplemented"
+fun fact(0 : int) : int = 1
+  | fact(n : int) : int = n * fact(n - 1)
 ```
 and transforms it to this:
 ```
-(* 3.1 *)
 (*
-    shrub_map : 'a -> 'b -> 'c
+    fact : int -> int
     REQUIRES: true
-    ENSURES: shrub_map
+    ENSURES: fact
 *)
-fun shrub_map f S = raise Fail "Unimplemented"
+fun fact(0 : int) : int = 1
+  | fact(n : int) : int = n * fact(n - 1)
 ```
 
 Installation
 ============
 
 ```
-git clone https://github.com/Alex4913/15-150-DocGen.git
-cd 15-150-DocGen
+git clone https://github.com/Alex4913/SML-DocGen.git
+cd SML-DocGen
 chmod +x docgen
 ```
 
