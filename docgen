@@ -32,13 +32,13 @@ def produceDocumentation(path, fileName):
 
   # Run the file in the interpreter
   pipeIn = subprocess.Popen(["echo", 
-             "val _ = OS.Process.exit(OS.Process.success);"],
+             "use \"%s\"; val _ = OS.Process.exit(OS.Process.success);" % path],
              stdout = subprocess.PIPE)
   
   # Try to open the file
   try:
-    output = subprocess.check_output(["sml", path], stdin = pipeIn.stdout,
-                                        stderr = subprocess.PIPE).splitlines()
+    output = subprocess.check_output(["sml"], stdin = pipeIn.stdout,
+                                     stderr = subprocess.PIPE).splitlines()
   except:
     print fileName, "could not be compiled by SML!"
     usage()
