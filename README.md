@@ -65,4 +65,4 @@ Disclaimer
 
 This is purely for personal use. I assume no liability for the use of this program on an
 actual homework assignment, rather the intent is for use on personal code. Please see the
-LISCENCE file.
+LICENSE file.
