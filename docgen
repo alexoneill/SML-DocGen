@@ -27,7 +27,7 @@ def produceDocumentation(path, fileName):
   smlFile = open(path)
 
   # Get lines
-  lines = [line.strip() for line in smlFile]
+  lines = [line for line in smlFile]
   smlFile.close()
 
   # Run the file in the interpreter
@@ -46,14 +46,26 @@ def produceDocumentation(path, fileName):
 
   # Parse the sml file, mapping function names to function types
   smlRef = {}
-  for line in (output):
+  i = 0
+  while (i < len(output)):
+    line = output[i]
     if(line.startswith("val")):
       line = line[3:]
-      (fnName, fnType) = tuple(map(lambda x: x.strip(), line.split(":")))
+
+      multipleLines = [line]
+      while (i < len(output) - 1 and not (output[i + 1].startswith("val")
+        or output[i + 1].startswith("type") 
+        or output[i + 1].startswith("datatype"))):
+        multipleLines += [output[i + 1]]
+        i += 1
+
+      fnDec = reduce(lambda x, y : x.strip() + " " + y.strip(), multipleLines)
+      (fnName, fnType) = tuple(map(lambda x: x.strip(), fnDec.split(":")))
       fnName = fnName.split()[0]
 
       # Store
       smlRef[fnName] = fnType
+    i += 1
   
   # Create a list of the final file output
   finalLines = []
@@ -64,18 +76,18 @@ def produceDocumentation(path, fileName):
       fnType = smlRef[fnName]
 
       # Insert the compiled information
-      finalLines += ["(*"]
-      finalLines += ["    %s : %s" % (fnName, fnType)]
-      finalLines += ["    REQUIRES: true"]
-      finalLines += ["    ENSURES: %s" % fnName]
-      finalLines += ["*)"]
+      finalLines += ["(*\n"]
+      finalLines += ["    %s : %s\n" % (fnName, fnType)]
+      finalLines += ["    REQUIRES: true\n"]
+      finalLines += ["    ENSURES: %s\n" % fnName]
+      finalLines += ["*)\n"]
     
     finalLines += [lines[i]]
 
   # Write to a temp file, tell user
   outFile = open(path + ".tmp", "w")
   for line in finalLines:
-    outFile.write("%s\n" % line)
+    outFile.write(line)
   outFile.close()
 
   print ("Comments generated for %s, and output to %s!" % 
