@@ -73,14 +73,17 @@ def produceDocumentation(path, fileName):
     # Find functions
     if(lines[i].startswith("fun") and detectDoc(lines, i)):
       fnName = lines[i][3:].strip().split()[0]
-      fnType = smlRef[fnName]
-
-      # Insert the compiled information
-      finalLines += ["(*\n"]
-      finalLines += ["    %s : %s\n" % (fnName, fnType)]
-      finalLines += ["    REQUIRES: true\n"]
-      finalLines += ["    ENSURES: %s\n" % fnName]
-      finalLines += ["*)\n"]
+   
+      # Do not handle functions from outside sources
+      if(fnName in smlRef):
+        fnType = smlRef[fnName]
+ 
+        # Insert the compiled information
+        finalLines += ["(*\n"]
+        finalLines += ["    %s : %s\n" % (fnName, fnType)]
+        finalLines += ["    REQUIRES: true\n"]
+        finalLines += ["    ENSURES: %s\n" % fnName]
+        finalLines += ["*)\n"]
     
     finalLines += [lines[i]]
 
@@ -90,8 +93,7 @@ def produceDocumentation(path, fileName):
     outFile.write(line)
   outFile.close()
 
-  print ("Comments generated for %s, and output to %s!" % 
-    (fileName, fileName + ".tmp"))
+  print ("%s -> %s!" % (fileName, fileName + ".tmp"))
 
 # Where the magic is invoked
 def main():
@@ -103,19 +105,29 @@ def main():
     sys.exit(0)
  
   # Open files
+  notFound = False
   for arg in args[1:]:
-    path = os.path.join(os.getcwd(), arg)
+    # Absolute paths
+    if(arg[0] == "/"):
+      path = arg
+    else:
+      path = os.path.join(os.getcwd(), arg)
+
+    # Try wildcards
     if(not os.path.isfile(path)):
       possible = glob.glob(path)
       if(len(possible)):
         for fileName in possible:
           produceDocumentation(path, fileName)
       else:
+        notFound = True
         print arg, "not found!"
-        usage()
-        sys.exit(0)
     else:
       produceDocumentation(path, arg)
+ 
+  # Show doc if a file was invalid
+  if(notFound):
+    usage()
 
 # Run it!
 if(__name__ == "__main__"):
