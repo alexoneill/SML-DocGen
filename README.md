@@ -55,10 +55,7 @@ It will overwrite any previous versions.
 The Future
 ==========
 
-It does not support absolute paths quite yet. Nor does it give templates
-for test functions. These will be added in the future.
-
-
+It does not give templates for test functions. This will be added in the future.
 
 Disclaimer
 ==========
